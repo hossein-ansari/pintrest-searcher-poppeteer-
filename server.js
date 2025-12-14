@@ -8,12 +8,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get('/', (req, res) => res.json({ ok: true, message: 'Pinterest Scraper MVC API' }));
 app.use('/api', routes);
 
-app.get('/', (req, res) => res.json({ ok: true, message: 'Pinterest Scraper MVC API' }));
 
 async function start() {
-  app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+  app.listen(PORT, '0.0.0.0', () => console.log(`Server started on port ${PORT}`));
 }
 
 start().catch(err => {
@@ -21,7 +21,6 @@ start().catch(err => {
   process.exit(1);
 });
 
-// graceful shutdown
 process.on('SIGINT', async () => {
   console.log('Shutting down...');
   process.exit(0);

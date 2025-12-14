@@ -1,4 +1,5 @@
 const jobService = require('../services/jobService');
+const {validateHttpUrl} = require('../services/downloadService');
 
 async function searchImmediate(req, res) {
   const query = (req.query.query || req.query.q || '').toString();
@@ -16,4 +17,14 @@ async function searchImmediate(req, res) {
 }
 
 
-module.exports = { searchImmediate};
+async function downloadImmediate(req, res) {
+  const { url } = req.body || {};
+  if (!url || !validateHttpUrl(url)) return res.status(400).json({ error: 'Invalid url' });
+  try {
+    jobService.downloadNow(res,url)
+  } catch (err) {
+    return res.status(500).json({ error: 'download failed', message: err.message });
+  }
+}
+
+module.exports = { searchImmediate, downloadImmediate };
