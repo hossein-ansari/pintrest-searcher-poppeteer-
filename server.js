@@ -12,6 +12,7 @@ app.get('/', (req, res) => res.json({ ok: true, message: 'Pinterest Scraper MVC 
 app.use('/api', routes);
 
 
+
 async function start() {
   app.listen(PORT, '0.0.0.0', () => console.log(`Server started on port ${PORT}`));
 }

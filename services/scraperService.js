@@ -28,6 +28,7 @@ async function scrapePinterest(query, maxCount = 20) {
               }
             } catch (e) { }
           }
+          console.log(src)
           if (!src) return null;
           if (src.startsWith('//')) return 'https:' + src;
           if (src.startsWith('http')) return src;
@@ -49,7 +50,6 @@ async function scrapePinterest(query, maxCount = 20) {
       if (found.size >= maxCount) break;
 
       await page.evaluate(() => window.scrollBy(0, window.innerHeight * 0.9));
-      await page.waitForTimeout(1000 + Math.floor(Math.random() * 800));
     }
 
     // dismiss overlays once and re-check
@@ -64,7 +64,6 @@ async function scrapePinterest(query, maxCount = 20) {
             }
           });
         });
-        await page.waitForTimeout(700);
         const urls2 = await collectFromPage();
         urls2.forEach(u => { if (u && u.startsWith('http')) found.add(u); });
       } catch (e) { /* ignore */ }
