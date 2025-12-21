@@ -1,9 +1,6 @@
 const axios = require('axios');
 const mime = require('mime-types');
 const path = require('path');
-const fs = require('fs/promises');
-const fsSync = require('fs');
-const archiver = require('archiver');
 const sanitize = require('sanitize-filename');
 const { URL } = require('url');
 const MAX_FILE_BYTES = 10 * 1024 * 1024;

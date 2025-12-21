@@ -26,5 +26,12 @@ async function downloadImmediate(req, res) {
     return res.status(500).json({ error: 'download failed', message: err.message });
   }
 }
+async function downloadAndConverterImageImmediate(req, res) {
+  try {
+    jobService.downloadAndConverterImageNow(req,res)
+  } catch (err) {
+    return res.status(500).json({ error: 'download and convert failed', message: err.message });
+  }
+}
 
-module.exports = { searchImmediate, downloadImmediate };
+module.exports = { searchImmediate, downloadImmediate,downloadAndConverterImageImmediate };
